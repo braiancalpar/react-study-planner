@@ -6,5 +6,6 @@ export const store = configureStore({
   reducer: {
     tasks: taskReducer,
     theme: themeReducer,
+    analytics: analyticReducer,
   },
 });
