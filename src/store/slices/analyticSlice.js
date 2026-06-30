@@ -22,9 +22,12 @@ const analyticSlice = createSlice({
       state.pendingTasks = tasks.filter((task) => !task.completed).length;
 
       state.overdueTasks = tasks.filter((task) => {
+        const [day, month, year] = task.date.split("/");
+        const taskDate = new Date(year, month - 1, day);
+
         if (task.completed || !task.date) return false;
-        const taskDate = new Date(task.date);
-        return taskDate < currentDate;
+
+        return taskDate < currentDate.setHours(0, 0, 0, 0);
       }).length;
 
       state.completionPercentage =
