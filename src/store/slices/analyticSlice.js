@@ -1,4 +1,4 @@
-import createSlice from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   totalTasks: 0,
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const analyticSlice = createSlice({
-  name: "analytic",
+  name: "analytics",
   initialState,
   reducers: {
     updateAnalytics: (state, action) => {
@@ -22,7 +22,7 @@ const analyticSlice = createSlice({
       state.pendingTasks = tasks.filter((task) => !task.completed).length;
 
       state.overdueTasks = tasks.filter((task) => {
-        if (!task.completed || !task.date) return false;
+        if (task.completed || !task.date) return false;
         const taskDate = new Date(task.date);
         return taskDate < currentDate;
       }).length;
